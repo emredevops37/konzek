@@ -5,10 +5,9 @@ services:
     image: myapp:latest
     build:
       context: .
-    deploy:
-      replicas: 2
-      restart_policy:
-        condition: on-failure
+    ports:
+      - "8080" # Sadece dahili erişim için, harici port belirtmeye gerek yok
+    restart: always
     networks:
       - app-network
 

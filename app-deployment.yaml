@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: akimmetal/myapp:v2
+        image: emredochub/myapp:v2
         ports:
         - containerPort: 8080
         resources:
