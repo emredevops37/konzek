@@ -154,8 +154,8 @@ events {}
 
 http {
   upstream app_servers {
-  server dockerlar-app-1:8080;
-  server dockerlar-app-2:8080;
+  server dockerlar-app-1:8080 max_fails=3 fail_timeout=30s;
+  server dockerlar-app-2:8080 max_fails=3 fail_timeout=30s;
 }
 
 
@@ -167,6 +167,7 @@ http {
     }
   }
 }
+
 
 ```
 Nginx, bir backend konteyner çalışmıyorsa onu kullanmayı otomatik olarak durdurur. Ancak, bunu anlaması için bir sağlık kontrolü (health check) yapılandırabilirsiniz. Örneğin:
@@ -236,7 +237,7 @@ metadata:
   labels:
     app: myapp
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: myapp
@@ -247,7 +248,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: emredochub/myapp:latest
+        image: emredochub/myapp
         ports:
         - containerPort: 8080
         resources:
@@ -300,6 +301,7 @@ spec:
             name: app-service
             port:
               number: 80
+
 ```
 metalLB kurmak için önce 
 
@@ -365,7 +367,9 @@ Hello, World from app-deployment-55d4bc9dc9-wfdml!
 
 Hatta bu süreç içinde bir CI/CD tool kullanarak (örneğin Jenkis) github gibi bir registeryden kodda değişiklik olursa tetiklenecek bir pipeline ile yeni imageları docker hub'a yollayacak bir sistem de kurulabilir, bu da yine DevOps kültüründe çok kullanılan bir mimaridir.
 
-bu sefer image değişikliğini imperative değil declerative olarak direk terminalden yapalım:
+
+bu sefer image değişikliğini imperative değil declerative olarak yapalım:
+
 ```
 kubectl set image deployment/my-app my-app-container=akimmetal/myapp:v2
 ```
