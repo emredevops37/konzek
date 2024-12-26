@@ -7,7 +7,6 @@ spec:
     app: myapp
   ports:
   - protocol: TCP
-    port: 80  # Cluster içindeki port
-    targetPort: 8080  # Pod'un dinlediği port
-    nodePort: 30003 # Sabit port (opsiyonel)
-  type: type: LoadBalancer
+    port: 80         # Cluster içindeki port
+    targetPort: 8080 # Pod'un dinlediği port
+  type: LoadBalancer
