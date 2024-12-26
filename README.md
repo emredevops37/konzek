@@ -1,4 +1,4 @@
-önce aws konsolde bir amazon linux 2023 makine ayağa kaldıralım.
+Önce aws konsolde bir amazon linux 2023 makine ayağa kaldıralım.
 burada hem makineye ssh ile bağlanmak hemde kendi uygulamamızı görebilmek için security grup ayarlarından 22 ve 8080 portlarını açık olmasını unutmayalım
 
 sonra makineye ssh ile bağlandık.
